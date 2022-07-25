@@ -22,14 +22,36 @@ dbListTables(MyDataBase)
 dbListFields(MyDataBase, 'COMPRAS_FAMILIARES')
 DataDB <- dbGetQuery(MyDataBase, "select * from COMPRAS_FAMILIARES")
 class(DataDB)
+
+#PRIMERAS 6 FILAS
 head(DataDB)
 
-Media.precio <- mean(DataDB$PRECIO)  # Media a la variable de población
+#MEDIANA DEL PRECIO
+Media.precio <- mean(DataDB$PRECIO)  
 Media.precio 
 
-install.packages("dplyr")
+#install.packages("dplyr")
 
 library(dplyr)
 Precio.Walmart <-  DataDB %>% filter(LUGAR == "WALMART" ,  PRECIO >= 300.00)
+
 Precio.Walmart
+#CATEGORIAS UNICAS
+unique(DataDB$CATEGORIA)
+#PRIMEROS 5 REGISTROS
+
+rs <- dbSendQuery(MyDataBase, "SELECT * FROM COMPRAS_FAMILIARES LIMIT 5;")
+dbFetch(rs)
+?dbFetch
+
+#install.packages("ggplot2")
+library(ggplot2)
+names(DataDB)
+
+#grafico de dispersion
+
+
+
+
+
 
