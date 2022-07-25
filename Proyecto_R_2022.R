@@ -10,13 +10,6 @@ gitcreds_set()
 library(DBI)
 library(RMySQL)
 
-MyDataBase <- dbConnect(
-  drv = RMySQL::MySQL(),
-  dbname = "u752080463_Gastos",
-  host = "sql741.main-hosting.eu",
-  username = "u752080463_D",
-  password = "Laika888")
-
 
 dbListTables(MyDataBase)
 dbListFields(MyDataBase, 'COMPRAS_FAMILIARES')
@@ -44,11 +37,18 @@ rs <- dbSendQuery(MyDataBase, "SELECT * FROM COMPRAS_FAMILIARES LIMIT 5;")
 dbFetch(rs)
 ?dbFetch
 
+
 #install.packages("ggplot2")
 library(ggplot2)
 names(DataDB)
 
 #grafico de dispersion
+
+ggplot(DataDB,aes(x=LUGAR,y=CATEGORIA, colours(am))) + geom_point()
+ggplot(DataDB,aes(x=LUGAR,y=PRECIO, colours(am))) + geom_point()
+ggplot(DataDB,aes(x=LUGAR,y=GENERO, colours(am))) + geom_point()
+ggplot(DataDB,aes(x=CATEGORIA,y=PRECIO,colours(am))) + geom_point()
+
 
 
 
