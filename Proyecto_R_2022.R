@@ -28,13 +28,13 @@ class(DataDB)
 head(DataDB)
 
 #MEDIANA DEL PRECIO
-Media.precio <- mean(DataDB$PRECIO)  
+Media.precio <- mean(DataDB$PRECIO)
 Media.precio 
 
 #install.packages("dplyr")
 
 library(dplyr)
-Precio.Walmart <-  DataDB %>% filter(LUGAR == "WALMART" ,  PRECIO >= 1000.00)
+Precio.Walmart <-  DataDB %>% filter(LUGAR == "WALMART" ,  PRECIO >= 300.00)
 setwd("/cloud/project")
 write.csv(Precio.Walmart,"/cloud/project/WALMART_PRECIO.csv", row.names = T)
 
@@ -50,21 +50,12 @@ dbFetch(rs)
 #install.packages("ggplot2")
 library(ggplot2)
 names(DataDB)
+
 #grafico de pastel
 
 ggplot(DataDB,aes(x="",y=LUGAR, fill=GENERO))+
   geom_bar(stat = "identity",color="white")+
   coord_polar(theta="y")
-
-ggplot(DataDB,aes(x="",y=DESCUENTO, fill=CATEGORIA))+
-  geom_bar(stat = "identity",
-           color="white")+
-  geom_text(aes(label=percent(porcentaje/100)),
-            position=position_stack(vjust=0.5),color="white",size=6)+
-  coord_polar(theta = "y")+
-  scale_fill_manual(values=c("salmon","steelblue","orange","gray"))+
-  theme_void()+
-  labs(title="Gráfico de Pie")
 
 
 #grafico de dispersion
@@ -98,6 +89,10 @@ DataDB %>%
   xlab("PRECIO") +
   ylab("Frecuencias") +
   theme_light()
+
+#boxplot
+
+ggplot(DataDB, aes(x=CATEGORIA,y=LUGAR))+ geom_boxplot + ggtitle("")
 
 #Graficos de Dispersion guardando
 (Guardando_respuesta <- ggplot(DataDB,aes(x=DESCUENTO,y=PRECIO)) + 
