@@ -34,8 +34,9 @@ Media.precio
 
 library(dplyr)
 Precio.Walmart <-  DataDB %>% filter(LUGAR == "WALMART" ,  PRECIO >= 300.00)
+setwd("/cloud/project")
+write.csv(Precio.Walmart,"/cloud/project/WALMART_PRECIO.csv", row.names = T)
 
-Precio.Walmart
 #CATEGORIAS UNICAS
 unique(DataDB$CATEGORIA)
 #PRIMEROS 5 REGISTROS
