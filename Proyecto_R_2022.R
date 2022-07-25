@@ -19,3 +19,17 @@ MyDataBase <- dbConnect(
 
 
 dbListTables(MyDataBase)
+dbListFields(MyDataBase, 'COMPRAS_FAMILIARES')
+DataDB <- dbGetQuery(MyDataBase, "select * from COMPRAS_FAMILIARES")
+class(DataDB)
+head(DataDB)
+
+Media.precio <- mean(DataDB$PRECIO)  # Media a la variable de población
+Media.precio 
+
+install.packages("dplyr")
+
+library(dplyr)
+Precio.Walmart <-  DataDB %>% filter(LUGAR == "WALMART" ,  PRECIO >= 300.00)
+Precio.Walmart
+
