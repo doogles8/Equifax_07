@@ -58,7 +58,48 @@ ggplot(DataDB,aes(x=DESCUENTO,y=PRECIO, colour=LUGAR)) +
   theme_dark() +
   facet_wrap("GENERO")
 
+hist(DataDB$PRECIO,breaks =seq(0,600,100), 
+     main="Histogramas de gastos familiares",
+     xlab="PRECIO",
+     ylab="Frecuencias")
 
+#Eliminando filas o valores perdido
+DataDB <- na.omit(DataDB)
+
+#Con GGPLOT
+
+DataDB %>%
+  ggplot()+aes(PRECIO)+ 
+  geom_histogram(binwidth = 100)
+
+DataDB %>%
+  ggplot()+
+  aes(PRECIO)+ 
+  geom_histogram(binwidth = 100, col="black", fill ="green")+
+  ggtitle("Histogramas de gastos familiares") +
+  xlab("PRECIO") +
+  ylab("Frecuencias") +
+  theme_light()
+
+#Graficos de Dispersion guardando
+(Guardando_respuesta <- ggplot(DataDB,aes(x=DESCUENTO,y=PRECIO)) + 
+  geom_point())
+#Linea de tendencia
+(Guardando_respuesta <- ggplot(DataDB,aes(x=DESCUENTO,y=PRECIO, col=LUGAR)) + 
+    geom_point())
+
+(Guardando_respuesta <- ggplot(DataDB,aes(x=DESCUENTO,y=PRECIO, col=LUGAR)) + 
+    geom_point()+
+     geom_smooth(method = "lm", se=T))
+
+Guardando_respuesta + labs(x='DESCUENTO(1%-100%)',
+y='Precio en Dolares',
+colour='Almacenes de compra')
+
+
+Guardando_respuesta + facet_wrap("LUGAR")
+ 
+Guardando_respuesta + facet_grid(GENERO ~ LUGAR)
 
 
 
