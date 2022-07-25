@@ -101,6 +101,7 @@ Guardando_respuesta + facet_wrap("LUGAR")
  
 Guardando_respuesta + facet_grid(GENERO ~ LUGAR)
 
+#Falta agregar a la base de datos
 
 
 
