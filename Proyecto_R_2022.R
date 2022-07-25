@@ -51,10 +51,12 @@ names(DataDB)
 
 #grafico de dispersion
 
-ggplot(DataDB,aes(x=LUGAR,y=CATEGORIA, colours(am))) + geom_point()
-ggplot(DataDB,aes(x=LUGAR,y=PRECIO, colours(am))) + geom_point()
-ggplot(DataDB,aes(x=LUGAR,y=GENERO, colours(am))) + geom_point()
-ggplot(DataDB,aes(x=CATEGORIA,y=PRECIO,colours(am))) + geom_point()
+ggplot(DataDB,aes(x=DESCUENTO,y=PRECIO, colour=LUGAR)) + geom_point()
+
+ggplot(DataDB,aes(x=DESCUENTO,y=PRECIO, colour=LUGAR)) + 
+  geom_point() +
+  theme_dark() +
+  facet_wrap("GENERO")
 
 
 
